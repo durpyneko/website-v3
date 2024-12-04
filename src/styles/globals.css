@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "Doto-Regular";
+  src: url(/fonts/Doto_Rounded-Regular.ttf);
+}
+
+body {
+  font-family: "Doto-Regular", monospace;
+}
