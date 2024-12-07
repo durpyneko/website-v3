@@ -1,6 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import "dotenv/config";
 import axios from "axios";
+
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 type ResponseData = {
   message: string;
