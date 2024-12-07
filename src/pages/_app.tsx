@@ -42,6 +42,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
       <Box h={"100vh"} className={Gugi_.className}>
         <Component {...pageProps} />
+        <Box pb={10}></Box>
         <Center>
           <Box position={"absolute"} bottom={0}>
             Version: 3.0 | In the works

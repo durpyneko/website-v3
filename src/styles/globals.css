@@ -6,3 +6,9 @@
 body {
   font-family: "Doto-Regular", monospace;
 }
+
+@keyframes rotate {
+  100% {
+    transform: rotate(1turn);
+  }
+}
