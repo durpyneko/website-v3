@@ -12,21 +12,32 @@ type ResponseData = {
 };
 
 let user_data = "";
-
-// TODO: Make cache update every 1 hour
+let last_time = Number();
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {
+  const now = new Date().getTime();
+  console.log(`${last_time} < ${now}`);
+  if (last_time + 3600 * 1000 < now) {
+    // refech from osu api
+    console.log("Refetching from Osu! API...");
+    await getUserData();
+  }
   if (user_data) {
     return res.status(200).json({
       message: "User fetched successfully from cache",
       data: user_data,
     });
   } else {
+    await getUserData();
+  }
+
+  async function getUserData() {
     try {
       const api_key = process.env.OSU_API_KEY;
+      last_time = now;
 
       if (!api_key) {
         return res.status(500).json({

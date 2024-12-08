@@ -4,8 +4,8 @@ export default function CustomBox({ children }: { children: React.ReactNode }) {
   return (
     <Box
       position="relative"
-      minWidth="350px"
-      minHeight="40px"
+      width={["90%", "450px", "450px"]}
+      minHeight={["30px", "40px", "50px"]}
       borderRadius="10px"
       bgColor="rgba(100,100,100,0.3)"
       padding="20px"
@@ -16,6 +16,7 @@ export default function CustomBox({ children }: { children: React.ReactNode }) {
       alignItems="center"
       fontWeight="bold"
       fontFamily="sans-serif"
+      fontSize={["12px", "16px", "18px"]}
       zIndex={2}
       overflow="hidden"
     >

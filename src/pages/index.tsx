@@ -101,7 +101,7 @@ export default function Home() {
               <HStack gap={6}>
                 <Image
                   src={`https://a.ppy.sh/${user_data?.user_id}`}
-                  maxW={40}
+                  maxWidth={["40%", 40, 40]}
                   borderRadius={12}
                 ></Image>
                 {user_data_loading ? (
@@ -127,6 +127,12 @@ export default function Home() {
                     </Text>
                     <Text>
                       <Text color={"#ff66ab"} as={"span"}>
+                        Global:{" "}
+                      </Text>
+                      {Number(user_data.pp_rank).toLocaleString()}
+                    </Text>
+                    <Text>
+                      <Text color={"#ff66ab"} as={"span"}>
                         Accuracy:{" "}
                       </Text>
                       {Number(user_data.accuracy).toFixed(2)}%
@@ -147,12 +153,7 @@ export default function Home() {
                           .split("T")[0]
                       }
                     </Text>
-                    <Text>
-                      <Text color={"#ff66ab"} as={"span"}>
-                        Global:{" "}
-                      </Text>
-                      {Number(user_data.pp_rank).toLocaleString()}
-                    </Text>
+
                     <Text>
                       <Text color={"#ff66ab"} as={"span"}>
                         Play time:
