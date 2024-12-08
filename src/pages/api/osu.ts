@@ -24,6 +24,7 @@ export default async function handler(
     // refech from osu api
     console.log("Refetching from Osu! API...");
     await getUserData();
+    return;
   }
   if (user_data) {
     return res.status(200).json({
