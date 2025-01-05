@@ -10,8 +10,9 @@ export default function Header({ header }: { header?: string }) {
         <meta name="description" content="sup" />
         <meta name="keywords" content="Vercel, Portfolio, website" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" type="image/png" href="/favicon.png" />
-        <meta property="og:image" content="/favicon.png" />
+        {/* <link rel="icon" type="image/png" href="/favicon.png" /> */}
+        <link rel="icon" type="image/x-icon" href="/images/wife/crop.jpg" />
+        <meta property="og:image" content="/images/wife/crop.jpg" />
       </Head>
     </>
   );

@@ -2,13 +2,17 @@
 import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { useState } from "react";
 
 // Chakra
-import { Box, Center, ChakraProvider } from "@chakra-ui/react";
+import { Box, Center, ChakraProvider, Text } from "@chakra-ui/react";
 import theme from "@/lib/theme";
 
 // Components
 import Header from "@/components/Header";
+import Navbar from "@/components/Navbar";
+import Spacer from "@/components/Spacer";
+import Footer from "@/components/Footer";
 
 // CSS
 import "@/styles/globals.css";
@@ -31,9 +35,10 @@ if (typeof window !== "undefined") {
 
 // Fonts
 import { Gugi } from "next/font/google";
-const Gugi_ = Gugi({ subsets: ["latin"], weight: "400" });
+const Gugi_ = Gugi({ subsets: ["latin"], weight: "400", display: "swap" });
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const [selectedTab, setSelectedTab] = useState(0);
   return (
     <ChakraProvider theme={theme}>
       <Header />
@@ -41,13 +46,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <SpeedInsights />
 
       <Box h={"100vh"} className={Gugi_.className}>
-        <Component {...pageProps} />
-        <Box pb={10}></Box>
-        <Center>
-          <Box position={"absolute"} bottom={0}>
-            Version: 3.0 | In the works
-          </Box>
-        </Center>
+        <Navbar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+        <Component
+          {...pageProps}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
+        <Spacer />
+        <Footer />
       </Box>
     </ChakraProvider>
   );

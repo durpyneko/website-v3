@@ -1,6 +1,5 @@
 // Chackra
-import { background, extendTheme, type ThemeConfig } from "@chakra-ui/react";
-import { mode } from "@chakra-ui/theme-tools";
+import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
 import type { StyleFunctionProps } from "@chakra-ui/styled-system";
 
 const config: ThemeConfig = {
@@ -10,22 +9,22 @@ const config: ThemeConfig = {
 
 const theme = extendTheme({
   config,
-  colors: {
-    color: "rgb(131, 127, 142)",
-    background: "#0d0d0d",
+  shadows: {
+    shadow: "0px 0px 4px 0px rgba(2, 2, 2, 0.8)",
+    glow: "0px 0px 4px 2px rgba(64, 64, 90, 0.6)",
   },
-  accent: {
-    light: "#B00B69",
-    default: "#B00B69",
-    dark: "#420A55",
-    bg: "#420A55",
-    divider: "#042069",
-    transparent: "transparent",
+  colors: {
+    color: "rgb(188, 177, 198)",
+    background: "#14141a",
+    bg: "#22222a",
+    transp: "rgba(0, 0, 0, 0.4)",
+    border: "#34363d",
+    bgHover: "#2e2e38",
+    bgSelected: "#30303a",
   },
   styles: {
     global: (props: StyleFunctionProps) => ({
       body: {
-        fontfamily: "Doto-Regular",
         color: "color",
         background: "background",
       },
