@@ -25,6 +25,7 @@ import Header from "@/components/Header";
 import OsuBox from "@/components/OsuBox";
 import NiceBox from "@/components/CustomElements/NiceBox";
 import HomePanel from "@/components/Pages/HomePanel";
+import SocialsPage from "@/components/Pages/SocialsPage";
 
 // Types
 type OsuUser = {
@@ -72,7 +73,7 @@ export default function Home({ selectedTab, setSelectedTab }: any) {
               <Text>Projects page</Text>
             </TabPanel>
             <TabPanel p={0}>
-              <Text>Socials page</Text>
+              <SocialsPage />
             </TabPanel>
           </TabPanels>
         </Tabs>

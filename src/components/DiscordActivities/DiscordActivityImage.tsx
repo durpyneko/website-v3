@@ -57,8 +57,8 @@ export default function DiscordActivityImage({
               boxSize="30px"
               objectFit="cover"
               position="absolute"
-              bottom="-6px"
-              right="-6px"
+              bottom="-7px"
+              right="-7px"
               border="3px solid"
               borderColor={"bgHover"}
               bg={"black"}

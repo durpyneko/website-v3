@@ -231,7 +231,7 @@ export default function DiscordBox({
                             </Text>
                           </NiceTooltip>
                           <NiceTooltip
-                            label={activity.details}
+                            label={activity.state}
                             openDelay={1000}
                           >
                             <Text
