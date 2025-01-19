@@ -7,6 +7,7 @@ import {
   Text,
   HStack,
   Divider,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDiscordPresence } from "@/pages/api/discord";
@@ -21,6 +22,7 @@ const MotionBox = motion(Box);
 
 export default function HomePanel() {
   const presence = useDiscordPresence();
+  const isSmallDevice = useBreakpointValue({ base: true, md: false });
   const [showSpotify, setShowSpotify] = useState(!!presence?.spotify);
 
   useEffect(() => {
@@ -41,7 +43,7 @@ export default function HomePanel() {
       <Flex direction={"column"} gap={4}>
         {presence ? (
           <>
-            <Draggable>
+            <Draggable disabled={isSmallDevice}>
               <Box
                 position="relative"
                 role="group"
@@ -65,7 +67,7 @@ export default function HomePanel() {
 
             <AnimatePresence>
               {showSpotify && (
-                <Draggable>
+                <Draggable disabled={isSmallDevice}>
                   <MotionBox
                     initial={{ opacity: 0, x: 100 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -98,7 +100,7 @@ export default function HomePanel() {
 
       <AnilistBox />
 
-      <Draggable>
+      <Draggable disabled={isSmallDevice}>
         <NiceBox
           p={0}
           borderColor={"rgba(113, 30, 215, 0.5)"}

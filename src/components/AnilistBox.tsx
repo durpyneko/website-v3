@@ -5,6 +5,7 @@ import {
   Image,
   Spinner,
   Text,
+  useBreakpointValue,
   VStack,
 } from "@chakra-ui/react";
 import AnilistActBox from "./AnilistActBox";
@@ -52,6 +53,8 @@ export interface ListActivity {
 }
 
 export default function AnilistBox() {
+  const isSmallDevice = useBreakpointValue({ base: true, md: false });
+
   const [alData, setAlData] = useState<AniListResponse>();
   const [loading, setLoading] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -121,7 +124,7 @@ export default function AnilistBox() {
   }, []);
 
   return (
-    <Draggable>
+    <Draggable disabled={isSmallDevice}>
       <NiceBox
         p={4}
         pt={0}
