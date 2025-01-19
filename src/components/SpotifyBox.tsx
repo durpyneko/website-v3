@@ -66,11 +66,7 @@ export default function SpotifyBox({
           <NiceTooltip label={presence?.spotify?.album}>
             <Image
               src={presence?.spotify?.album_art_url}
-              boxSize="100%"
-              maxH="111px"
-              minH="111px"
-              maxW="111px"
-              minW="111px"
+              boxSize={["90px", "111px"]}
               borderRadius={"8px"}
             />
           </NiceTooltip>
