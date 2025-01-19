@@ -3,18 +3,13 @@ import {
   Avatar,
   AvatarBadge,
   Box,
-  Center,
   HStack,
   Spinner,
   Text,
   VStack,
-  BoxProps,
   Flex,
-  Tooltip,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
+  BoxProps,
+  Center,
 } from "@chakra-ui/react";
 import { Presence } from "@/pages/api/discord";
 import { useEffect, useState } from "react";
@@ -48,11 +43,6 @@ export default function DiscordBox({
 }: DiscordBoxProps) {
   const [timesSinceStart, setTimesSinceStart] = useState<string[]>([]);
 
-  const [isExpanded, setIsExpanded] = useState(true);
-  const handleToggle = (isOpen: boolean) => {
-    setIsExpanded(isOpen);
-  };
-
   useEffect(() => {
     if (presence && presence.activities) {
       const intervals = presence.activities.map((activity, index) => {
@@ -62,7 +52,6 @@ export default function DiscordBox({
             setTimesSinceStart((prevTimes) => {
               const newTimes = [...prevTimes];
               newTimes[index] = calculateTimeSince(startTimestamp);
-              console.log(`Activity ${index}: ${newTimes[index]}`);
               return newTimes;
             });
           }, 1000);
@@ -92,173 +81,147 @@ export default function DiscordBox({
   return (
     <>
       {presence ? (
-        <Accordion
-          defaultIndex={[0]}
-          allowMultiple
-          allowToggle
-          onChange={(index) => {
-            setIsExpanded(
-              Array.isArray(index) ? index.includes(0) : index === 0
-            );
-          }}
-        >
-          <AccordionItem w={"100%"} borderRadius={"10px"}>
-            <NiceBox p={0} w={"100%"} {...rest}>
-              <AccordionButton p={0} w={"100%"}>
-                <Box
-                  bg="bgHover"
-                  borderTopRadius={"8px"}
-                  w={"100%"}
-                  boxShadow={"0px 3px 6px -2px background"}
-                  zIndex={0}
-                  borderBottomRadius={isExpanded ? 0 : "8px"}
-                  transition="border-radius 0.3s ease-in-out"
-                >
-                  <HStack
-                    p={2}
-                    px={3}
-                    justifyContent="space-between"
-                    textAlign={"center"}
-                    alignContent={"center"}
-                    fontWeight={"bold"}
-                  >
-                    <Text>Discord</Text>
-                    <Text>🗕 🗗 🗙</Text>
-                  </HStack>
-                </Box>
-              </AccordionButton>
-              <AccordionPanel p={4}>
-                <Box>
-                  <HStack>
-                    <Avatar
-                      src={`https://cdn.discordapp.com/avatars/${userId}/${presence.discord_user.avatar}.png`}
-                    >
-                      {(presence.discord_status === "online" && (
-                        <NiceTooltip label="Online">
-                          <AvatarBadge boxSize="1em" bg="green.500" />
-                        </NiceTooltip>
-                      )) ||
-                        (presence.discord_status === "idle" && (
-                          <NiceTooltip label="Idle">
-                            <AvatarBadge boxSize="1em" bg="yellow.500" />
-                          </NiceTooltip>
-                        )) ||
-                        (presence.discord_status === "dnd" && (
-                          <NiceTooltip label="Do Not Disturb">
-                            <AvatarBadge boxSize="1em" bg="red.500" />
-                          </NiceTooltip>
-                        )) ||
-                        (presence.discord_status === "offline" && (
-                          <NiceTooltip label="Offline">
-                            <AvatarBadge boxSize="1em" bg="gray.500" />
-                          </NiceTooltip>
-                        ))}
-                    </Avatar>
-                    <VStack align="start" spacing={0} pl={2}>
-                      <Text fontSize={["lg", "larger"]} fontWeight={"bold"}>
-                        {presence.discord_user.display_name}
-                      </Text>
-                      <Text
-                        fontSize={["sm", "lg"]}
-                        color={"rgba(188, 177, 198, 0.5)"}
-                      >
-                        {presence.discord_user.username}
-                      </Text>
-                    </VStack>
-                  </HStack>
-                  {presence.activities && presence.activities[0] && (
-                    <NiceBox
-                      maxW={"100%"}
-                      p={3}
-                      px={4}
-                      minH={0}
-                      mt={2}
-                      borderColor={"rgba(128, 90, 213, 0.5)"}
-                      bg={"bgHover"}
-                      /* boxShadow={"none"} */
-                    >
-                      <NiceTooltip
-                        label={presence.activities[0].state}
-                        openDelay={1000}
-                      >
-                        <Text
-                          isTruncated
-                          maxW="320px"
-                          display="flex"
-                          alignItems="center"
-                          textAlign="center"
-                          height={"100%"}
-                        >
-                          {presence.activities[0].state}
-                        </Text>
-                      </NiceTooltip>
-                    </NiceBox>
-                  )}
+        <NiceBox p={0} w={"100%"} {...rest}>
+          <Box
+            bg="bgHover"
+            borderTopRadius={"8px"}
+            w={"100%"}
+            boxShadow={"0px 3px 6px -2px background"}
+            zIndex={0}
+          >
+            <HStack
+              p={2}
+              px={3}
+              justifyContent="space-between"
+              textAlign={"center"}
+              alignContent={"center"}
+              fontWeight={"bold"}
+            >
+              <Text>Discord</Text>
+              <Text>🗕 🗗 🗙</Text>
+            </HStack>
+          </Box>
 
-                  {nonSpotifyActivities &&
-                    nonSpotifyActivities.map((activity, index) => (
-                      <Flex
-                        key={activity.originalIndex}
-                        gap={2}
-                        alignItems="center"
-                        justifyContent="flex-start"
-                        bg={"bgHover"}
-                        p={2}
-                        borderRadius={"8px"}
-                        px={3}
-                        mt={index > -1 ? 2 : 0}
+          <Box p={4}>
+            <HStack>
+              <Avatar
+                src={`https://cdn.discordapp.com/avatars/${userId}/${presence.discord_user.avatar}.png`}
+              >
+                {(presence.discord_status === "online" && (
+                  <NiceTooltip label="Online">
+                    <AvatarBadge boxSize="1em" bg="green.500" />
+                  </NiceTooltip>
+                )) ||
+                  (presence.discord_status === "idle" && (
+                    <NiceTooltip label="Idle">
+                      <AvatarBadge boxSize="1em" bg="yellow.500" />
+                    </NiceTooltip>
+                  )) ||
+                  (presence.discord_status === "dnd" && (
+                    <NiceTooltip label="Do Not Disturb">
+                      <AvatarBadge boxSize="1em" bg="red.500" />
+                    </NiceTooltip>
+                  )) ||
+                  (presence.discord_status === "offline" && (
+                    <NiceTooltip label="Offline">
+                      <AvatarBadge boxSize="1em" bg="gray.500" />
+                    </NiceTooltip>
+                  ))}
+              </Avatar>
+              <VStack align="start" spacing={0} pl={2}>
+                <Text fontSize={["lg", "larger"]} fontWeight={"bold"}>
+                  {presence.discord_user.display_name}
+                </Text>
+                <Text
+                  fontSize={["sm", "lg"]}
+                  color={"rgba(188, 177, 198, 0.5)"}
+                >
+                  {presence.discord_user.username}
+                </Text>
+              </VStack>
+            </HStack>
+
+            {presence.activities && presence.activities[0] && (
+              <NiceBox
+                maxW={"100%"}
+                p={3}
+                px={4}
+                minH={0}
+                mt={2}
+                borderColor={"rgba(128, 90, 213, 0.5)"}
+                bg={"bgHover"}
+              >
+                <NiceTooltip
+                  label={presence.activities[0].state}
+                  openDelay={1000}
+                >
+                  <Text
+                    isTruncated
+                    maxW="320px"
+                    display="flex"
+                    alignItems="center"
+                    textAlign="center"
+                    height={"100%"}
+                  >
+                    {presence.activities[0].state}
+                  </Text>
+                </NiceTooltip>
+              </NiceBox>
+            )}
+
+            {nonSpotifyActivities &&
+              nonSpotifyActivities.map((activity, index) => (
+                <Flex
+                  key={activity.originalIndex}
+                  gap={2}
+                  alignItems="center"
+                  justifyContent="flex-start"
+                  bg={"bgHover"}
+                  p={2}
+                  borderRadius={"8px"}
+                  px={3}
+                  mt={index > -1 ? 2 : 0}
+                >
+                  <DiscordActivityImage
+                    activity={activity}
+                    index={activity.originalIndex}
+                    height={"110px"}
+                    width={"110px"}
+                  />
+                  <VStack align="start" gap={1} ml={1}>
+                    <Text fontWeight={"bold"}>{activity.name}</Text>
+                    <NiceTooltip label={activity.details} openDelay={1000}>
+                      <Text
+                        isTruncated
+                        maxW={["43vw", "280px"]}
+                        whiteSpace="nowrap"
+                        overflow="hidden"
+                        textOverflow="ellipsis"
                       >
-                        <DiscordActivityImage
-                          activity={activity}
-                          index={activity.originalIndex}
-                          height={"110px"}
-                          width={"110px"}
-                        />
-                        <VStack align="start" gap={1} ml={1}>
-                          <Text fontWeight={"bold"}>{activity.name}</Text>
-                          <NiceTooltip
-                            label={activity.details}
-                            openDelay={1000}
-                          >
-                            <Text
-                              isTruncated
-                              maxW={["43vw", "280px"]}
-                              whiteSpace="nowrap"
-                              overflow="hidden"
-                              textOverflow="ellipsis"
-                            >
-                              {activity.details}
-                            </Text>
-                          </NiceTooltip>
-                          <NiceTooltip
-                            label={activity.state}
-                            openDelay={1000}
-                          >
-                            <Text
-                              isTruncated
-                              maxW={["43vw", "280px"]}
-                              whiteSpace="nowrap"
-                              overflow="hidden"
-                              textOverflow="ellipsis"
-                            >
-                              {activity.state}
-                            </Text>
-                          </NiceTooltip>
-                          <Text>{timesSinceStart[activity.originalIndex]}</Text>
-                        </VStack>
-                      </Flex>
-                    ))}
-                  {children}
-                </Box>
-              </AccordionPanel>
-            </NiceBox>
-          </AccordionItem>
-        </Accordion>
+                        {activity.details}
+                      </Text>
+                    </NiceTooltip>
+                    <NiceTooltip label={activity.state} openDelay={1000}>
+                      <Text
+                        isTruncated
+                        maxW={["43vw", "280px"]}
+                        whiteSpace="nowrap"
+                        overflow="hidden"
+                        textOverflow="ellipsis"
+                      >
+                        {activity.state}
+                      </Text>
+                    </NiceTooltip>
+                    <Text>{timesSinceStart[activity.originalIndex]}</Text>
+                  </VStack>
+                </Flex>
+              ))}
+            {children}
+          </Box>
+        </NiceBox>
       ) : (
-        <NiceBox p={10} {...rest}>
-          <AbsoluteCenter>
-            <Spinner />
-          </AbsoluteCenter>
+        <NiceBox position={"absolute"} top={5} p={10} {...rest}>
+          <Spinner />
         </NiceBox>
       )}
     </>

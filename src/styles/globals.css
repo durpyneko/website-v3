@@ -1,14 +1,69 @@
-@font-face {
+/* @font-face {
   font-family: "Doto-Regular";
   src: url(/fonts/Doto_Rounded-Regular.ttf);
 }
 
 body {
   font-family: "Doto-Regular", monospace;
-}
+} */
 
 @keyframes rotate {
   100% {
     transform: rotate(1turn);
   }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-5%);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-5%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes slideToLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(5%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideToRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-5%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+.slideIn {
+  animation: slideToLeft 0.4s ease-in-out forwards;
+}
+
+.slideOut {
+  animation: slideToLeft 0.4s ease-in-out reverse;
 }

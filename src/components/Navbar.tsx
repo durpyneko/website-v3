@@ -28,6 +28,7 @@ export default function Navbar({ selectedTab, setSelectedTab }: any) {
       position="relative"
       alignItems="center"
       mb={4}
+      zIndex={1000}
     >
       <NextLink href="/">
         <HStack gap={[2, 4]} pl={1}>

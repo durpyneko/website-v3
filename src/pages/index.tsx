@@ -1,78 +1,60 @@
-// Imports
-import axios from "axios";
-
-// React
 import { useEffect, useState } from "react";
-
-// Chakra
-import {
-  Box,
-  Center,
-  HStack,
-  Image,
-  Link,
-  Spinner,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text,
-  useTheme,
-  VStack,
-} from "@chakra-ui/react";
-
-// Components
+import { Box, Center, Tabs, TabPanel, TabPanels, Text } from "@chakra-ui/react";
 import Header from "@/components/Header";
-import OsuBox from "@/components/OsuBox";
-import NiceBox from "@/components/CustomElements/NiceBox";
 import HomePanel from "@/components/Pages/HomePanel";
 import SocialsPage from "@/components/Pages/SocialsPage";
 
-// Types
-type OsuUser = {
-  user_id: string;
-  username: string;
-  join_date: string;
-  level: number;
-  pp_rank: number;
-  accuracy: number;
-  total_seconds_played: number;
-};
-
 export default function Home({ selectedTab, setSelectedTab }: any) {
-  const theme = useTheme();
-
-  const [user_data_loading, user_data_setLoading] = useState(true);
-  const [user_dat_error, user_dat_setError] = useState("");
-  const [user_data, set_user_data] = useState<OsuUser>();
+  const [currentTab, setCurrentTab] = useState(selectedTab);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    /* axios
-      .get("/api/osu")
-      .then((response) => {
-        set_user_data(response.data.data[0] || "No user data found");
-        user_data_setLoading(false);
-      })
-      .catch((err) => {
-        user_dat_setError("Failed to fetch user data");
-        user_data_setLoading(false);
-        console.error(err);
-      }); */
-  }, []);
+    if (selectedTab !== currentTab && !isAnimating) {
+      setIsAnimating(true);
+
+      const timeout = setTimeout(() => {
+        setIsAnimating(false);
+        setCurrentTab(selectedTab);
+      }, 400);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [selectedTab, currentTab]);
 
   return (
     <Box>
       <Header header="Home" />
-
-      <Center>
-        <Tabs index={selectedTab} onChange={(index) => setSelectedTab(index)}>
+      <Center m={2} pt={0}>
+        <Tabs index={currentTab}>
           <TabPanels>
-            <TabPanel p={0}>
+            <TabPanel
+              p={0}
+              style={{
+                animation: isAnimating
+                  ? "slideUp 0.4s ease-in-out"
+                  : "slideDown 0.4s ease-in-out",
+              }}
+            >
               <HomePanel />
             </TabPanel>
-            <TabPanel p={0}>
+            <TabPanel
+              p={0}
+              style={{
+                animation: isAnimating
+                  ? "slideUp 0.4s ease-in-out"
+                  : "slideDown 0.4s ease-in-out",
+              }}
+            >
               <Text>Projects page</Text>
             </TabPanel>
-            <TabPanel p={0}>
+            <TabPanel
+              p={0}
+              style={{
+                animation: isAnimating
+                  ? "slideUp 0.4s ease-in-out"
+                  : "slideDown 0.4s ease-in-out",
+              }}
+            >
               <SocialsPage />
             </TabPanel>
           </TabPanels>
