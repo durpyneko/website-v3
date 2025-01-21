@@ -73,7 +73,9 @@ export default function AnilistActBox({ data }: AnilistActBoxProps) {
               /* _hover={{ textDecoration: "unset" }} */
             >
               <Text as={"span"} color={"purple.300"}>
-                {data.media.title.english}
+                {data.media.title.english
+                  ? data.media.title.english
+                  : data.media.title.romaji}
               </Text>
             </Link>
           </Box>
