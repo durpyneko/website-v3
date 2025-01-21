@@ -138,6 +138,8 @@ export default function AnilistBox() {
         css={{
           animation: "slideDown 0.4s ease-in-out",
         }}
+        minW={"300px"}
+        minH={"60px"}
       >
         <Box
           bg="bgHover"
