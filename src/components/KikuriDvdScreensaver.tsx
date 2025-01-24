@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export default function KikuriDvdScreensaver() {
   const [boxPosition, setBoxPosition] = useState({ x: 100, y: 100 }); // start somewhere
-  const [velocity, setVelocity] = useState({ dx: 5, dy: 5 });
+  const [velocity, setVelocity] = useState({ dx: 2, dy: 2 });
 
   useEffect(() => {
     const moveBox = () => {
@@ -30,7 +30,7 @@ export default function KikuriDvdScreensaver() {
         }
 
         const magnitude = Math.sqrt(newDx * newDx + newDy * newDy);
-        const fixedSpeed = 5;
+        const fixedSpeed = 2;
         newDx = (newDx / magnitude) * fixedSpeed;
         newDy = (newDy / magnitude) * fixedSpeed;
 
