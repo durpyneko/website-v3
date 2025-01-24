@@ -22,11 +22,16 @@ const RubikGlitch = Rubik_Glitch({
 
 export default function Navbar({ selectedTab, setSelectedTab }: any) {
   const [themeK, setThemeK] = useState<number>();
+  const [popCookie, setPopCookie] = useState<number>();
   const themeCookie = useCookiePoller("theme");
+  const popCookiePoll = useCookiePoller("pop");
 
   useEffect(() => {
     setThemeK(Number(themeCookie));
   }, [themeCookie]);
+  useEffect(() => {
+    setPopCookie(Number(popCookiePoll));
+  }, [popCookiePoll]);
 
   function setCookie(cvalue: number) {
     document.cookie = `pop=${cvalue};max-age=31536000;path=/`;
@@ -46,7 +51,7 @@ export default function Navbar({ selectedTab, setSelectedTab }: any) {
       <HStack
         gap={[2, 4]}
         pl={1}
-        onClick={() => setCookie(1)}
+        onClick={() => setCookie(Number(!popCookie))}
         cursor={"pointer"}
       >
         <Image borderRadius={3} maxW={"50px"} src="/images/wife/crop.jpg" />
