@@ -3,6 +3,7 @@ import {
   Center,
   HStack,
   Image,
+  Link,
   Spinner,
   Text,
   useBreakpointValue,
@@ -164,46 +165,52 @@ export default function AnilistBox() {
 
         {!loading ? (
           <>
-            <Box
-              p={5}
-              backgroundImage={alData?.User.bannerImage}
-              backgroundSize={"cover"}
-              backgroundPosition={"center"}
-              backgroundColor="rgba(10, 10, 10, 0.5)"
-              backgroundBlendMode="darken"
-              /* backgroundClip={"text"} */
-              textShadow={"0px 2px 3px rgba(0, 0, 0, 0.5)"}
-              /* boxShadow={"inset 0 40px 300px rgba(0, 0, 0, 0.8)"} */
-              boxShadow="inset 0 -20px 30px 0px rgba(0, 0, 0, 0.8)"
+            <Link
+              href={`https://anilist.co/user/${alData?.User.id}`}
+              target="_blank"
+              _hover={{ textDecoration: "unset" }}
             >
-              <HStack>
-                <Image
-                  src={alData?.User.avatar.large}
-                  boxSize={[20, 40]}
-                  borderRadius={4}
-                />
-                <VStack
-                  gap={0}
-                  alignItems={"unset"}
-                  p={0}
-                  pt={2}
-                  lineHeight="shorter"
-                >
-                  <Text
-                    color={"whiteAlpha.500"}
-                    fontWeight={"bold"}
-                    ml={5}
-                    fontSize={["5xl", "8xl"]}
-                    mt={-5}
+              <Box
+                p={5}
+                backgroundImage={alData?.User.bannerImage}
+                backgroundSize={"cover"}
+                backgroundPosition={"center"}
+                backgroundColor="rgba(10, 10, 10, 0.5)"
+                backgroundBlendMode="darken"
+                /* backgroundClip={"text"} */
+                textShadow={"0px 2px 3px rgba(0, 0, 0, 0.5)"}
+                /* boxShadow={"inset 0 40px 300px rgba(0, 0, 0, 0.8)"} */
+                boxShadow="inset 0 -20px 30px 0px rgba(0, 0, 0, 0.8)"
+              >
+                <HStack>
+                  <Image
+                    src={alData?.User.avatar.large}
+                    boxSize={[20, 40]}
+                    borderRadius={4}
+                  />
+                  <VStack
+                    gap={0}
+                    alignItems={"unset"}
+                    p={0}
+                    pt={2}
+                    lineHeight="shorter"
                   >
-                    Anilist
-                  </Text>
-                  <Text fontWeight={"bold"} fontSize={["xl", "4xl"]} ml={5}>
-                    {alData?.User.name}
-                  </Text>
-                </VStack>
-              </HStack>
-            </Box>
+                    <Text
+                      color={"whiteAlpha.500"}
+                      fontWeight={"bold"}
+                      ml={5}
+                      fontSize={["5xl", "8xl"]}
+                      mt={-5}
+                    >
+                      Anilist
+                    </Text>
+                    <Text fontWeight={"bold"} fontSize={["xl", "4xl"]} ml={5}>
+                      {alData?.User.name}
+                    </Text>
+                  </VStack>
+                </HStack>
+              </Box>
+            </Link>
             <Center mt={4}>
               <VStack w={"100%"}>
                 {alData?.Page.activities.map((data, index) => (

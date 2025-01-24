@@ -9,9 +9,10 @@ import {
   Flex,
   Box,
 } from "@chakra-ui/react";
-import NextLink from "next/link";
 import NiceTab from "@/components/CustomElements/NiceTab";
 import { Rubik_Glitch } from "next/font/google";
+import { useEffect, useState } from "react";
+import useCookiePoller from "./hooks/useCookiePoller";
 
 const RubikGlitch = Rubik_Glitch({
   subsets: ["latin"],
@@ -20,28 +21,43 @@ const RubikGlitch = Rubik_Glitch({
 });
 
 export default function Navbar({ selectedTab, setSelectedTab }: any) {
+  const [themeK, setThemeK] = useState<number>();
+  const themeCookie = useCookiePoller("theme");
+
+  useEffect(() => {
+    setThemeK(Number(themeCookie));
+  }, [themeCookie]);
+
+  function setCookie(cvalue: number) {
+    document.cookie = `pop=${cvalue};max-age=31536000;path=/`;
+  }
+
   return (
     <Flex
       p={2}
-      bgColor="bg"
+      bgColor={!themeK ? "rgba(40, 40, 40, 0.2)" : "bg"}
+      backdropFilter={"blur(10px)"}
       boxShadow="shadow"
       position="relative"
       alignItems="center"
       mb={4}
-      zIndex={1000}
+      zIndex={999}
     >
-      <NextLink href="/">
-        <HStack gap={[2, 4]} pl={1}>
-          <Image borderRadius={3} maxW={"50px"} src="/images/wife/crop.jpg" />
-          <Text
-            className={RubikGlitch.className}
-            fontSize={{ sm: "4xl", base: "2xl" }}
-            display={["none", "block"]}
-          >
-            v3.0
-          </Text>
-        </HStack>
-      </NextLink>
+      <HStack
+        gap={[2, 4]}
+        pl={1}
+        onClick={() => setCookie(1)}
+        cursor={"pointer"}
+      >
+        <Image borderRadius={3} maxW={"50px"} src="/images/wife/crop.jpg" />
+        <Text
+          className={RubikGlitch.className}
+          fontSize={{ sm: "4xl", base: "2xl" }}
+          display={["none", "block"]}
+        >
+          v3.0
+        </Text>
+      </HStack>
 
       <Box
         ml={["80px", "0"]}
@@ -55,7 +71,9 @@ export default function Navbar({ selectedTab, setSelectedTab }: any) {
           onChange={(index) => setSelectedTab(index)}
           variant="unstyled"
         >
-          <TabList gap={[1, 2, 2]}>
+          <TabList
+            gap={[2]} // 1 , 2
+          >
             <NiceTab isSelected={selectedTab === 0}>Home</NiceTab>
             <NiceTab isSelected={selectedTab === 1}>Projects</NiceTab>
             <NiceTab isSelected={selectedTab === 2}>Socials</NiceTab>

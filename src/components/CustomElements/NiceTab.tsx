@@ -1,5 +1,6 @@
 import { Tab, TabProps } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useCookiePoller from "../hooks/useCookiePoller";
 
 interface NiceTabProps extends TabProps {
   children: React.ReactNode;
@@ -8,10 +9,17 @@ interface NiceTabProps extends TabProps {
 }
 
 export default function NiceTab({ isActive, children, ...rest }: NiceTabProps) {
+  const [themeK, setThemeK] = useState<number>();
+  const themeCookie = useCookiePoller("theme");
+
+  useEffect(() => {
+    setThemeK(Number(themeCookie));
+    console.log(themeK);
+  }, [themeCookie]);
   return (
     <Tab
       borderRadius="10px"
-      bgColor={isActive ? "bgSelected" : "bg"}
+      bgColor={isActive ? "bg" : "transparent"} // bg
       _selected={{
         bg: "bgSelected",
         boxShadow: "glow", // 0px 0px 4px 2px rgba(125, 125, 156, 0.4)

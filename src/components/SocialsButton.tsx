@@ -18,22 +18,30 @@ interface SocialsButtonProps {
   icon: IconType;
   name: string;
   url: string;
+  bg: string;
   backgroundPosition: string;
+  backgroundSize?: string;
 }
 
 export default function SocialsButton({
   icon,
   name,
   url,
+  bg,
   backgroundPosition,
+  backgroundSize = "cover",
 }: SocialsButtonProps) {
   const [hovering, setHovering] = useState(false);
 
   const isSmallScreen = useBreakpointValue({ base: true, md: false });
 
+  /* const adjustedBackgroundPosition = isSmallScreen
+    ? `0 calc(${backgroundPosition.split(" ")[1]} - 0px)` // 80
+    : `0 calc(${backgroundPosition.split(" ")[1]} - 0px)`; // 160 */
+
   const adjustedBackgroundPosition = isSmallScreen
-    ? `0 calc(${backgroundPosition.split(" ")[1]} - 80px)`
-    : `0 calc(${backgroundPosition.split(" ")[1]} - 160px)`;
+    ? `center calc(${backgroundPosition.split(" ")[1]} - 0px)`
+    : `center calc(${backgroundPosition.split(" ")[1]} - 0px)`;
 
   return (
     <HStack
@@ -61,8 +69,8 @@ export default function SocialsButton({
             left={0}
             width="100%"
             height="100%"
-            backgroundImage="url('/images/wife/20240928_133346.jpg')"
-            backgroundSize="cover"
+            backgroundImage={`url('${bg}')`} // 20240928_133346.jpg
+            backgroundSize={backgroundSize}
             backgroundPosition={adjustedBackgroundPosition}
             backgroundRepeat="no-repeat"
             backgroundColor="rgba(10, 10, 10, 0.7)"
