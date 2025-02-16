@@ -19,13 +19,14 @@ export default function KikuriDvdScreensaver() {
         let newDx = velocity.dx;
         let newDy = velocity.dy;
 
+        // ! She is still escaping containment, I don't know why
         if (newPosition.x <= 0 || newPosition.x + 100 >= windowWidth) {
-          newDx = -newDx - 5;
+          newDx = -newDx - 3;
           newDy += Math.random() * 2 - 1;
         }
 
         if (newPosition.y <= 0 || newPosition.y + 100 >= windowHeight) {
-          newDy = -newDy - 5;
+          newDy = -newDy - 3;
           newDx += Math.random() * 2 - 1;
         }
 
