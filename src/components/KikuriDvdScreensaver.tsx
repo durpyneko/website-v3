@@ -2,32 +2,30 @@ import { Box, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 export default function KikuriDvdScreensaver() {
-  const [boxPosition, setBoxPosition] = useState({ x: 100, y: 100 }); // start somewhere
+  const [boxPosition, setBoxPosition] = useState({ x: 100, y: 100 });
   const [velocity, setVelocity] = useState({ dx: 2, dy: 2 });
 
   useEffect(() => {
     const moveBox = () => {
       setBoxPosition((prevPosition) => {
-        const newPosition = {
-          x: prevPosition.x + velocity.dx,
-          y: prevPosition.y + velocity.dy,
-        };
+        let { x, y } = prevPosition;
+        let { dx, dy } = velocity;
 
         const windowWidth = window.innerWidth;
         const windowHeight = window.innerHeight;
+        const boxSize = 100;
 
-        let newDx = velocity.dx;
-        let newDy = velocity.dy;
+        let newDx = dx;
+        let newDy = dy;
 
-        // ! She is still escaping containment, I don't know why
-        if (newPosition.x <= 0 || newPosition.x + 100 >= windowWidth) {
-          newDx = -newDx - 3;
-          newDy += Math.random() * 2 - 1;
+        if (x + newDx <= 0 || x + newDx + boxSize >= windowWidth) {
+          newDx = -newDx;
+          newDx += Math.random() * 2 - 1;
         }
 
-        if (newPosition.y <= 0 || newPosition.y + 100 >= windowHeight) {
-          newDy = -newDy - 3;
-          newDx += Math.random() * 2 - 1;
+        if (y + newDy <= 0 || y + newDy + boxSize >= windowHeight) {
+          newDy = -newDy;
+          newDy += Math.random() * 2 - 1;
         }
 
         const magnitude = Math.sqrt(newDx * newDx + newDy * newDy);
@@ -37,13 +35,13 @@ export default function KikuriDvdScreensaver() {
 
         setVelocity({ dx: newDx, dy: newDy });
 
-        return newPosition;
+        return { x: x + newDx, y: y + newDy };
       });
     };
 
     const animationFrame = requestAnimationFrame(moveBox);
     return () => cancelAnimationFrame(animationFrame);
-  }, [velocity]);
+  }, [boxPosition]);
 
   return (
     <Box
