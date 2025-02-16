@@ -1,6 +1,7 @@
 import { Box, Center, HStack, Image, Link, Text } from "@chakra-ui/react";
 import NiceBox from "./CustomElements/NiceBox";
 import { ListActivity } from "./AnilistBox";
+import NiceTooltip from "./CustomElements/NiceTooltip";
 
 interface AnilistActBoxProps {
   data: ListActivity;
@@ -38,7 +39,7 @@ export default function AnilistActBox({ data }: AnilistActBoxProps) {
             textOverflow={"ellipsis"}
             white-space="nowrap"
             overflow="hidden"
-            noOfLines={3}
+            noOfLines={[3, 2]}
             minW={"200px"}
           >
             <Text
@@ -72,11 +73,19 @@ export default function AnilistActBox({ data }: AnilistActBoxProps) {
               target="_blank"
               /* _hover={{ textDecoration: "unset" }} */
             >
-              <Text as={"span"} color={"purple.300"}>
-                {data.media.title.english
-                  ? data.media.title.english
-                  : data.media.title.romaji}
-              </Text>
+              <NiceTooltip
+                key={
+                  data.media.title.english
+                    ? data.media.title.romaji
+                    : data.media.title.english
+                }
+              >
+                <Text as={"span"} color={"purple.300"}>
+                  {data.media.title.english
+                    ? data.media.title.english
+                    : data.media.title.romaji}
+                </Text>
+              </NiceTooltip>
             </Link>
           </Box>
         </HStack>

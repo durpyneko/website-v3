@@ -157,11 +157,9 @@ export default function DiscordBox({
                 >
                   <Text
                     isTruncated
-                    maxW="320px"
-                    display="flex"
-                    alignItems="center"
-                    textAlign="center"
-                    height={"100%"}
+                    textOverflow={"ellipsis"}
+                    whiteSpace="nowrap"
+                    overflow="hidden"
                   >
                     {presence.activities[0].state}
                   </Text>

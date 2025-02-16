@@ -20,12 +20,12 @@ export default function KikuriDvdScreensaver() {
         let newDy = velocity.dy;
 
         if (newPosition.x <= 0 || newPosition.x + 100 >= windowWidth) {
-          newDx = -newDx - 0.3;
+          newDx = -newDx - 5;
           newDy += Math.random() * 2 - 1;
         }
 
         if (newPosition.y <= 0 || newPosition.y + 100 >= windowHeight) {
-          newDy = -newDy - 0.3;
+          newDy = -newDy - 5;
           newDx += Math.random() * 2 - 1;
         }
 
