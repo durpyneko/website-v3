@@ -140,10 +140,11 @@ export default function HomePanel() {
             </HStack>
           </Box>
           <Box p={4}>
-            <Text fontSize={"4xl"}>Hello World!</Text>
+            <Text fontSize={"4xl"}>Info</Text>
             <Divider />
             <Box pb={2} />
-            <Text>&#9888; description missing</Text>
+            <Text>I'm not super actively coding anymore due to irl stuff</Text>
+            {/* <Text>&#9888; description missing</Text> */}
           </Box>
         </NiceBox>
       </Draggable>
