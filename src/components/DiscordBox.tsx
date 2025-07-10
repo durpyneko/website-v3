@@ -141,31 +141,34 @@ export default function DiscordBox({
               </VStack>
             </HStack>
 
-            {presence.activities && presence.activities[0] && (
-              <NiceBox
-                maxW={"100%"}
-                p={3}
-                px={4}
-                minH={0}
-                mt={2}
-                borderColor={"rgba(128, 90, 213, 0.5)"}
-                bg={"bgHover"}
-              >
-                <NiceTooltip
-                  label={presence.activities[0].state}
-                  openDelay={1000}
+            {presence.activities &&
+              presence.activities[0].name == "Custom Status" && (
+                <NiceBox
+                  maxW={"100%"}
+                  p={3}
+                  px={4}
+                  minH={0}
+                  mt={2}
+                  borderColor={"rgba(128, 90, 213, 0.5)"}
+                  bg={"bgHover"}
                 >
-                  <Text
-                    isTruncated
-                    textOverflow={"ellipsis"}
-                    whiteSpace="nowrap"
-                    overflow="hidden"
+                  <NiceTooltip
+                    label={`${presence.activities[0].emoji.name} ${presence.activities[0].state}`}
+                    openDelay={1000}
                   >
-                    {presence.activities[0].state}
-                  </Text>
-                </NiceTooltip>
-              </NiceBox>
-            )}
+                    <Text
+                      isTruncated
+                      textOverflow={"ellipsis"}
+                      whiteSpace="nowrap"
+                      overflow="hidden"
+                      flexDir={"row"}
+                    >
+                      {presence.activities[0].emoji.name}{" "}
+                      {presence.activities[0].state}
+                    </Text>
+                  </NiceTooltip>
+                </NiceBox>
+              )}
 
             {nonSpotifyActivities &&
               nonSpotifyActivities.map((activity, index) => (

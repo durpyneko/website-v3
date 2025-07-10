@@ -24,6 +24,9 @@ interface DiscordActivity {
   name: string;
   details: string;
   state: string;
+  emoji: {
+    name: String,
+  },
   application_id: string;
   timestamps: {
     start: number;
