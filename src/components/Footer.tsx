@@ -6,7 +6,7 @@ export default function Footer() {
     <Center mb={4}>
       <VStack w={"100vw"}>
         <NiceDivider />
-        <Center>Version: 3.2.7 | &copy; durpyneko</Center>
+        <Center>Version: 3.2.8 | &copy; durpyneko</Center>
       </VStack>
       {/* <NiceBox
         position={"fixed"}
